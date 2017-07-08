@@ -16,10 +16,10 @@ public class JokeAsyncTaskTest {
 
     @Test
     public void testDoInBackground() throws Exception {
-       MainActivityFragment fragment = new MainActivityFragment();
-        fragment.testFlag = true;
+        MainActivityFragment fragment = new MainActivityFragment();
+        fragment.testOk = true;
         new JokeAsyncTask().execute(fragment);
         Thread.sleep(5000);
-        assertTrue("Error: Fetched Joke = " + fragment.loadedJoke, fragment.loadedJoke != null);
+        assertTrue("Error: Loaded Joke = " + fragment.Joke, fragment.Joke != null);
     }
 }

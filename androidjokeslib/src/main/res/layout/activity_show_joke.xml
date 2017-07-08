@@ -9,7 +9,7 @@
     tools:context=".ShowJokeActivity">
 
     <TextView
-        android:id="@+id/joketext_view"
+        android:id="@+id/joketext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

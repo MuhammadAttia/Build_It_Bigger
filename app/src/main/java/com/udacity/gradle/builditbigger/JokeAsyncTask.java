@@ -2,9 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
-import com.example.JokeDisplay;
 import com.example.muhammad.myapp.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -18,7 +16,7 @@ import java.io.IOException;
 
 class JokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+    private Context mContext;
     private MainActivityFragment mainActivityFragment;
 
     @Override
@@ -32,8 +30,8 @@ class JokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
             myApiService = builder.build();
         }
 
-        mainActivityFragment  = params[0];
-        context = mainActivityFragment.getActivity();
+        mainActivityFragment = params[0];
+        mContext = mainActivityFragment.getActivity();
 
 
         try {
@@ -46,7 +44,7 @@ class JokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        mainActivityFragment.loadedJoke = result;
-        mainActivityFragment.launchDisplayJokeActivity();
+        mainActivityFragment.Joke = result;
+        mainActivityFragment.DisplayJokeActivity();
     }
 }
