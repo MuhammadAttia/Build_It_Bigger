@@ -16,12 +16,13 @@ import java.io.IOException;
  * Created by Muhammad Attia on 07/07/2017.
  */
 
-class JokeAsyncTask extends AsyncTask<Context, Void, String> {
+class JokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private MainActivityFragment mainActivityFragment;
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected String doInBackground(MainActivityFragment... params) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new
                     AndroidJsonFactory(), null)
@@ -31,7 +32,9 @@ class JokeAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
+        mainActivityFragment  = params[0];
+        context = mainActivityFragment.getActivity();
+
 
         try {
             return myApiService.getJoke().execute().getData();
@@ -40,9 +43,10 @@ class JokeAsyncTask extends AsyncTask<Context, Void, String> {
         }
     }
 
+
     @Override
     protected void onPostExecute(String result) {
-        JokeDisplay jokeDisplay = new JokeDisplay();
-        Toast.makeText(context, jokeDisplay.getJoke(), Toast.LENGTH_LONG).show();
+        mainActivityFragment.loadedJoke = result;
+        mainActivityFragment.launchDisplayJokeActivity();
     }
 }
